@@ -54,6 +54,6 @@ jobs:
           password: ${{ secrets.PRODUCTION_SERVER_PASSWORD }}
           port: 22
           script: |
-            cd ${WORKDIR}
+            cd /www/wwwroot/glslEditor
             tar -xzvf dist.tar.gz -C . --strip-components=1
             rm -f dist.tar.gz
