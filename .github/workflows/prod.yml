@@ -55,5 +55,5 @@ jobs:
           port: 22
           script: |
             cd /www/wwwroot/glslEditor
-            tar -xzvf dist.tar.gz -C . --strip-components=1
+            tar -xzvf ./dist.tar.gz -C . --strip-components=1
             rm -f dist.tar.gz
