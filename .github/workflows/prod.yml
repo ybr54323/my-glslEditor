@@ -43,9 +43,9 @@ jobs:
           ssh-keyscan ${{ secrets.PRODUCTION_SERVER_HOST }} >> ~/.ssh/known_hosts
       - name: Upload file via SCP
         run: |
-          sshpass -p ${{ secrets.PRODUCTION_SERVER_PASSWORD }} ssh ${{ secrets.PRODUCTION_SERVER_USER }}@${{ secrets.PRODUCTION_SERVER_HOST }} "mkdir -p ${{WORKDIR}}"
+          sshpass -p ${{ secrets.PRODUCTION_SERVER_PASSWORD }} ssh ${{ secrets.PRODUCTION_SERVER_USER }}@${{ secrets.PRODUCTION_SERVER_HOST }} "mkdir -p ${WORKDIR}"
           # 然后上传文件
-          sshpass -p ${{ secrets.PRODUCTION_SERVER_PASSWORD }} rsync -avz -e ssh dist.tar.gz ${{ secrets.PRODUCTION_SERVER_USER }}@${{ secrets.PRODUCTION_SERVER_HOST }}:${{WORKDIR}}/
+          sshpass -p ${{ secrets.PRODUCTION_SERVER_PASSWORD }} rsync -avz -e ssh dist.tar.gz ${{ secrets.PRODUCTION_SERVER_USER }}@${{ secrets.PRODUCTION_SERVER_HOST }}:${WORKDIR}/
       - name: SSH into the server and run commands
         uses: appleboy/ssh-action@master
         with:
@@ -54,5 +54,5 @@ jobs:
           password: ${{ secrets.PRODUCTION_SERVER_PASSWORD }}
           port: 22
           script: |
-            tar -xzvf ${{WORKDIR}}/dist.tar.gz -C ${{WORKDIR}}/ --strip-components=1
-            rm -f ${{WORKDIR}}/dist.tar.gz
+            tar -xzvf ${WORKDIR}/dist.tar.gz -C ${WORKDIR}/ --strip-components=1
+            rm -f ${WORKDIR}/dist.tar.gz
