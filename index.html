@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>GLSL Editor</title>
-	<link href="vite.svg" rel="shortcut icon" />
+	<link href="favicon.gif" rel="shortcut icon" />
 	<style>
 		body {
 			height: 100%;
@@ -38,8 +38,11 @@
 
 	document.body.style.backgroundColor = window.getComputedStyle(glslEditor.editor.getWrapperElement(), null).getPropertyValue('background-color');
 
+	const allowedOrigins = ['https://yangbingrui.info', 'http://localhost:3000'];
+
 	window.addEventListener('message', (event) => {
-		if (event.origin !== 'https://yangbingrui.info') return;
+		if (!allowedOrigins.includes(event.origin)) return;
+
 		if (event.data.type === 'GLSL_UPDATE') {
 			// 更新 WebGL 着色器
 			updateShader(event.data.code);
